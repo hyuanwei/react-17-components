@@ -1,5 +1,24 @@
 import { data } from "../SpeakerData";
 
+function Session({ title, room }) {
+    //const { title, room } = props;
+    return (
+        <span className="session w-100">
+            {title} <strong>Room: {room}</strong>
+        </span>
+    );
+}
+function Sessions({ sessions }) {
+    return (
+        <div className="sessionBox card h-250">
+            <Session
+                title={sessions[0].title}
+                room={sessions[0].room.name}
+            ></Session>
+        </div>
+    );
+}
+
 const IndexPage = () => {
     return (
         <div className="container speakers-list">
@@ -17,7 +36,10 @@ const IndexPage = () => {
                     } = speaker;
 
                     return (
-                        <div className="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                        <div
+                            key={id}
+                            className="col-xs-12 col-sm-12 col-md-6 col-lg-4"
+                        >
                             <div className="card card-height p-4 mt-4">
                                 <div className="speaker-img d-flex flow-row justify-content-center align-items-center h-300">
                                     <img
@@ -40,14 +62,7 @@ const IndexPage = () => {
                                         </p>
                                     </div>
                                 </div>
-                                <div className="sessionBox card h-250">
-                                    <span className="session w-100">
-                                        {sessions[0].title}{" "}
-                                        <strong>
-                                            Room: {sessions[0].room.name}
-                                        </strong>
-                                    </span>
-                                </div>
+                                <Sessions sessions={sessions}></Sessions>
                             </div>
                         </div>
                     );
